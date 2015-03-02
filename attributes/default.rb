@@ -241,8 +241,7 @@ end
 
 # General settings
 default['apache']['service_name'] = default['apache']['package']
-default['apache']['listen_addresses']  = %w(*)
-default['apache']['listen_ports']      = %w(80)
+default['apache']['listen']            = %w(*:80)
 default['apache']['contact']           = 'ops@example.com'
 default['apache']['timeout']           = 300
 default['apache']['keepalive']         = 'On'

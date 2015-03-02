@@ -16,9 +16,12 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-unless node['apache']['listen_ports'].include?('443')
-  node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + ['443']
-end
+
+# Note(JR): We do not want this by default, may be needed on different port only
+#
+# unless node['apache']['listen_ports'].include?('443')
+#   node.set['apache']['listen_ports'] = node['apache']['listen_ports'] + ['443']
+# end
 
 include_recipe 'apache2::default'
 
