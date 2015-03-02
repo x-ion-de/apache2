@@ -269,6 +269,10 @@ if node['apache']['service_name'].nil?
 end
 default['apache']['listen_addresses']  = %w(*)
 default['apache']['listen_ports']      = %w(80)
+default['apache']['listen_specific']   = false
+if node['apache']['listen_specific'] && node['apache']['listen'].nil?
+  default['apache']['listen'] = %w(*:80)
+end
 default['apache']['contact']           = 'ops@example.com'
 default['apache']['timeout']           = 300
 default['apache']['keepalive']         = 'On'

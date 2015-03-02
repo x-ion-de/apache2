@@ -175,6 +175,8 @@ values are noted.
 * `node['apache']['version']` - Specifing 2.4 triggers apache 2.4 support. If the platform is known during our test to install 2.4 by default, it will be set to 2.4 for you. Otherwise it falls back to 2.2. This value should be specified as a string.
 * `node['apache']['listen_addresses']` - Addresses that httpd should listen on. Default is any ("*").
 * `node['apache']['listen_ports']` - Ports that httpd should listen on. Default is port 80.
+* `node['apache']['listen_specific']` - Whether to use the specific address:port combinations to listen on. Default is false.
+* `node['apache']['listen']` - List of specific address:port combinations that httpd should listen on. Default is any:80 ("*:80"). Only used if `node['apache']['listen_specific']` is set to true.
 * `node['apache']['contact']` - Value for ServerAdmin directive. Default "ops@example.com".
 * `node['apache']['timeout']` - Value for the Timeout directive. Default is 300.
 * `node['apache']['keepalive']` - Value for the KeepAlive directive. Default is On.

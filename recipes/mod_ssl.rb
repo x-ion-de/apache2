@@ -16,7 +16,8 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 #
-unless node['apache']['listen_ports'].include?(node['apache']['mod_ssl']['port'])
+unless node['apache']['listen_specific'] ||
+       node['apache']['listen_ports'].include?(node['apache']['mod_ssl']['port'])
   node.default['apache']['listen_ports'] = node['apache']['listen_ports'] + [node['apache']['mod_ssl']['port']]
 end
 
