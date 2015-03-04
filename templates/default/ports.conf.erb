@@ -3,10 +3,4 @@
 
 <% node['apache']['listen'].each do |address| -%>
 Listen <%= address %>
-
-# Note (JR): If you really need this, add it into your site config explicitly
-#
-# <% if node['apache']['version'] != "2.4" -%>
-# NameVirtualHost *:<%= port %>
-# <% end -%>
 <% end -%>
