@@ -197,16 +197,22 @@ web_app node['apache']['default_site_name'] do
   enable node['apache']['default_site_enabled']
 end
 
+# Note(JR): Hack to use native systemd service definition for Ubuntu 15.04++
+cookbook_file '/etc/systemd/system/apache2.service' do
+  force_unlink true
+  mode 0644
+  user 'root'
+  group 'root'
+  source 'systemd-apache2.service'
+  notifies :run, 'execute[systemctl daemon-reload]', :immediate
+end
+
+execute 'systemctl daemon-reload' do
+  action :nothing
+end
+
 service 'apache2' do
   service_name node['apache']['service_name']
-  case node['platform_family']
-  when 'rhel'
-    reload_command '/sbin/service httpd graceful'
-  when 'debian'
-    provider Chef::Provider::Service::Debian
-  when 'arch'
-    service_name 'httpd'
-  end
   supports [:start, :restart, :reload, :status]
   action [:enable, :start]
   only_if "#{node['apache']['binary']} -t", :environment => { 'APACHE_LOG_DIR' => node['apache']['log_dir'] }, :timeout => 10
